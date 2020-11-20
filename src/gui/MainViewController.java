@@ -12,6 +12,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,7 +34,7 @@ public class MainViewController implements Initializable {
     }
 
     public void onMenuItemDepartmentAction() {
-        System.out.println("onMenuItemDepartmentAction");
+        loadView("/gui/DepartmentList.fxml");
     }
 
     public void onMenuItemAboutAction() {
@@ -42,11 +43,12 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL uri, ResourceBundle rb) {
-        System.out.println("oi");
+
     }
 
     private synchronized void loadView (String absoluteName) {
         try {
+            // Pegando a referência para a cena principal e adicionando além do menu principal, o VBox da view ABout
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             VBox newVBox = loader.load();
 
