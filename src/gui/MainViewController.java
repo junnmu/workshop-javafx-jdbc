@@ -51,9 +51,10 @@ public class MainViewController implements Initializable {
 
     }
 
+    // Inicializando uma ação como parâmetro (método genérico com Consumer passando também exp. lambda como parâmetro)
     private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
         try {
-            // Pegando a referência para a cena principal e adicionando além do menu principal, o VBox da view ABout
+            // Pegando a referência para a cena principal e adicionando além do menu principal, o VBox da outra View
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             VBox newVBox = loader.load();
 
@@ -65,6 +66,7 @@ public class MainViewController implements Initializable {
             mainVBox.getChildren().add(mainMenu);
             mainVBox.getChildren().addAll(newVBox.getChildren());
 
+            // Pegando meu controller atual e aplicando o default method da interface funcional Consumer (accept)
             T controller = loader.getController();
             initializingAction.accept(controller);
         }
