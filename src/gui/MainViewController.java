@@ -12,6 +12,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import model.services.DepartmentService;
+import model.services.SellerService;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -32,7 +33,10 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void onMenuItemSellerAction() {
-        System.out.println("onMenuItemSellerAction");
+        loadView("/gui/SellerList.fxml", (SellerListController controller) -> {
+            controller.setSellerService(new SellerService());
+            controller.updateTableView();
+        });
     }
 
     public void onMenuItemDepartmentAction() {
@@ -59,7 +63,7 @@ public class MainViewController implements Initializable {
             VBox newVBox = loader.load();
 
             Scene mainScene = Main.getMainScene();
-            VBox mainVBox = (VBox) ((ScrollPane)mainScene.getRoot()).getContent();
+            VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
 
             Node mainMenu = mainVBox.getChildren().get(0);
             mainVBox.getChildren().clear();
@@ -69,8 +73,7 @@ public class MainViewController implements Initializable {
             // Pegando meu controller atual e aplicando o default method da interface funcional Consumer (accept)
             T controller = loader.getController();
             initializingAction.accept(controller);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
