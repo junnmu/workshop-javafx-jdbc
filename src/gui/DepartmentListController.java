@@ -85,13 +85,16 @@ public class DepartmentListController implements Initializable, DataChangeListen
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             Pane pane = loader.load();
 
-            // Injeção de dependências manuais
+            // Pegando controller, injetando dependências manuais,
+            // aplicação do Observer (essa clásse será inscrita como listener)
+            // e atualizando os dados do formulário
             DepartmentFormController controller = loader.getController();
             controller.setDepartment(obj);
             controller.setDepartmentService(new DepartmentService());
             controller.subscribeDataChangeListener(this);
             controller.updateFormData();
 
+            // Abrindo o modal
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Enter department data");
             dialogStage.setScene(new Scene(pane));

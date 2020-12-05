@@ -51,7 +51,7 @@ public class MainViewController implements Initializable {
 
     }
 
-    // Inicializando uma ação como parâmetro (método genérico com Consumer passando também exp. lambda como parâmetro)
+    // Inicializando uma ação como parâmetro (método genérico com Consumer passando exp. lambda como parâmetro)
     private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
         try {
             // Pegando a referência para a cena principal e adicionando além do menu principal, o VBox da outra View
